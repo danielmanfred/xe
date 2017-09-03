@@ -17,5 +17,6 @@ public class Pessoa extends GenericDomain {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+
 }

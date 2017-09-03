@@ -1,5 +1,9 @@
 package com.xe.domain;
 
-public class Administrador extends GenericDomain {
+import javax.persistence.Entity;
 
+@SuppressWarnings("serial")
+@Entity
+public class Administrador extends Pessoa {
+	
 }
