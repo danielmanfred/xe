@@ -2,10 +2,13 @@ package com.xe.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @SuppressWarnings("serial")
 @Entity
-public class Pessoa extends GenericDomain {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pessoa extends GenericDomain {
 
 	@Column(length = 50, nullable = false)
 	private String nome;

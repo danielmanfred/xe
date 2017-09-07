@@ -36,7 +36,7 @@
         <mapping class="com.xe.domain.Categoria"/>
         <mapping class="com.xe.domain.Item"/>
         <mapping class="com.xe.domain.Negocio"/>
-        <mapping class="com.xe.domain.Pessoa"/>        
+        <mapping class="com.xe.domain.Pessoa"/>
         <mapping class="com.xe.domain.Usuario"/>
         
     </session-factory>

@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.xe.domain.Pessoa;
 import com.xe.domain.Usuario;
 
 public class UsuarioDAOTest {
@@ -66,7 +65,7 @@ public class UsuarioDAOTest {
 	
 	@Test
 	public void editar() {
-		Long codigo = 5L;
+		Long codigo = 3L;
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario usuario = usuarioDAO.buscar(codigo);
