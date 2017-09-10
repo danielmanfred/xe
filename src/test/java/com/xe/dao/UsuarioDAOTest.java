@@ -9,13 +9,12 @@ import com.xe.domain.Usuario;
 
 public class UsuarioDAOTest {
 
-	@Test
-	@Ignore
+	@Test	
 	public void salvar() {
 		Usuario usuario = new Usuario();
-		usuario.setMatricula("2015789101");
-		usuario.setNome("Souza");
-		usuario.setSenha("24242424");
+		usuario.setMatricula("2015711111");
+		usuario.setNome("Roberto");
+		usuario.setSenha("11112222");
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
@@ -64,6 +63,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void editar() {
 		Long codigo = 3L;
 
