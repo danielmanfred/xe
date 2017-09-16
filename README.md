@@ -1,4 +1,10 @@
 # xe
+
+Integrantes: 
+- Daniel Tiago
+-
+-
+
 Projeto da disciplina Projeto de Software
 
 Os vídeos da apresentação da 1ª Sprint do projeto encontra-se numa playlist do Youtube 

@@ -12,9 +12,9 @@ public class UsuarioDAOTest {
 	@Test	
 	public void salvar() {
 		Usuario usuario = new Usuario();
-		usuario.setMatricula("2015711111");
-		usuario.setNome("Roberto");
-		usuario.setSenha("11112222");
+		usuario.setMatricula("2010711111");
+		usuario.setNome("Silvio");
+		usuario.setSenha("11112332");
 
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
