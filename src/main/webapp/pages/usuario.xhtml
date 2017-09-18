@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Administrador</title>
+	<title>Usuário</title>
 </h:head>
 <h:body>
 	<h:form>
-		<p:panel header="Administrador - Listagem">
+		<p:panel header="Usuário - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
 				paginator="true">
 				<f:facet name="header">
@@ -20,16 +20,28 @@
 				</p:column>
 				<p:column headerText="Nome">
 				</p:column>
+				<p:column headerText="Matrícula">
+				</p:column>
+				<p:column headerText="Senha">
+				</p:column>
+				<p:column headerText="Nota">
+				</p:column>
 			</p:dataTable>
 		</p:panel>
 	</h:form>
 
-	<p:dialog header="Administrador - Cadastro" widgetVar="dialogo"
+	<p:dialog header="Usuário - Cadastro" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form>
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nome:" />
 				<p:inputText size="30" maxlength="50" />
+				<p:outputLabel value="Matrícula:" />
+				<p:inputText size="15" maxlength="10" />
+				<p:outputLabel value="Senha:" />
+				<p:inputText size="15" maxlength="32" />
+				<p:outputLabel value="Nota:" />
+				<p:inputText size="8" maxlength="4" />
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" />
