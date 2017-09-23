@@ -2,7 +2,7 @@
 
 Integrantes: 
 - Daniel Tiago
--
+- Adonias Galvão
 -
 
 Projeto da disciplina Projeto de Software
