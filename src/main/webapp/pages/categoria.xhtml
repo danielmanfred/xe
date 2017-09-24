@@ -9,12 +9,15 @@
 	<title>Categoria</title>
 </h:head>
 <h:body>
+	<p:growl id="mensagem"/>
+
 	<h:form>
 		<p:panel header="Categoria - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
 				paginator="true">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{categoriaBean.novo()}" 
+						update=":cadastro:painel"/>	
 				</f:facet>
 				<p:column headerText="Código">
 				</p:column>
@@ -26,13 +29,13 @@
 
 	<p:dialog header="Categoria - Cadastro" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="cadastro">
+			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel value="Nome:" />
-				<p:inputText size="30" maxlength="50" />
+				<p:inputText size="30" maxlength="50" value="#{categoriaBean.categoria.nome}"/>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
+				<p:commandButton value="Salvar" actionListener="#{categoriaBean.salvar}" update=":mensagem :cadastro:painel"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 			</h:panelGrid>
 		</h:form>

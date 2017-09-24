@@ -20,17 +20,24 @@ public class GenericDAO<Entidade> {
 	}
 	
 	public void salvar(Entidade entidade) {
+		System.out.println("s0");
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		System.out.println("s0.1");
 		Transaction transacao = null;
+		System.out.println("s0.2");
 		
 		try {
+			System.out.println("s1");
 			transacao = sessao.beginTransaction();
 			sessao.save(entidade);
 			transacao.commit();
 		}
 		catch (RuntimeException erro) {
+			System.out.println("s2");
 			if (transacao != null) {
+				System.out.println("s3");
 				transacao.rollback();
+				System.out.println("s4");
 			}
 			throw erro;
 		}
@@ -101,6 +108,26 @@ public class GenericDAO<Entidade> {
 		try {
 			transacao = sessao.beginTransaction();
 			sessao.update(entidade);
+			transacao.commit();
+		}
+		catch (RuntimeException erro) {
+			if (transacao != null) {
+				transacao.rollback();
+			}
+			throw erro;
+		}
+		finally {
+			sessao.close();
+		}
+	}
+	
+	public void merge(Entidade entidade) {
+		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		Transaction transacao = null;
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.merge(entidade);
 			transacao.commit();
 		}
 		catch (RuntimeException erro) {

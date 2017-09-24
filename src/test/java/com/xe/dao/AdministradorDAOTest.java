@@ -10,10 +10,9 @@ import com.xe.domain.Administrador;
 public class AdministradorDAOTest {
 	
 	@Test
-	@Ignore
 	public void salvar() {
 		Administrador administrador = new Administrador();
-		administrador.setNome("John");
+		administrador.setNome("Jacob");
 		
 		PessoaDAO pessoaDAO = new PessoaDAO();
 		pessoaDAO.salvar(administrador);
@@ -63,6 +62,7 @@ public class AdministradorDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void editar() {
 		Long codigo = 5L;
 		
@@ -71,5 +71,14 @@ public class AdministradorDAOTest {
 		
 		administrador.setNome("Ringo");
 		administradorDAO.editar(administrador);
+	}
+	
+	@Test
+	@Ignore
+	public void merge() {
+		AdministradorDAO administradorDAO = new AdministradorDAO();
+		Administrador administrador = administradorDAO.buscar(10L);
+		administrador.setNome("George");
+		administradorDAO.merge(administrador);
 	}
 }

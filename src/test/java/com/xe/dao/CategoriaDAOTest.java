@@ -10,7 +10,6 @@ import com.xe.domain.Categoria;
 public class CategoriaDAOTest {
 	
 	@Test
-	@Ignore
 	public void salvar() {
 		Categoria categoria = new Categoria();		
 		categoria.setNome("Física");
@@ -50,6 +49,7 @@ public class CategoriaDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void editar() {
 		Long codigo = 1L;		
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
