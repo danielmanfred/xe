@@ -14,14 +14,16 @@
 	<h:form>
 		<p:panel header="Categoria - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
+				paginator="true" value="#{categoriaBean.categorias}" var="categoria" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{categoriaBean.novo()}" 
 						update=":cadastro:painel"/>	
 				</f:facet>
-				<p:column headerText="Código">
+				<p:column headerText="Código" sortBy="#{categoria.codigo}">
+					<h:outputText value="#{categoria.codigo}" />
 				</p:column>
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" sortBy="#{categoria.nome}" filterBy="#{categoria.nome}">
+					<h:outputText value="#{categoria.nome}" />
 				</p:column>
 			</p:dataTable>
 		</p:panel>

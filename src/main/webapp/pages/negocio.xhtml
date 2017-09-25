@@ -9,26 +9,36 @@
 	<title>Negócio</title>
 </h:head>
 <h:body>
-	<h:form>
+	<p:growl id="mensagem"/>
+
+	<h:form>	
 		<p:panel header="Negócio - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
+				paginator="true" value="#{negocioBean.negocios}" var="negocio" rows="10">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
+					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{negocioBean.novo()}"
+						update=":cadastro:painel"/>
 				</f:facet>
-				<p:column headerText="Código">
+				<p:column headerText="Código" sortBy="#{negocio.codigo}">
+					<h:outputText value="#{negocio.codigo}" />
 				</p:column>
-				<p:column headerText="Item">
+				<p:column headerText="Item" sortBy="#{negocio.item}">
+					<h:outputText value="#{negocio.item}" />
 				</p:column>
-				<p:column headerText="Cliente">
+				<p:column headerText="Cliente" sortBy="#{negocio.cliente}">
+					<h:outputText value="#{negocio.cliente}" />
 				</p:column>
-				<p:column headerText="Data">
+				<p:column headerText="Data" sortBy="#{negocio.data}">
+					<h:outputText value="#{negocio.data}" />
 				</p:column>
-				<p:column headerText="Valor">
+				<p:column headerText="Valor" sortBy="#{negocio.valor}">
+					<h:outputText value="#{negocio.valor}" />
 				</p:column>
-				<p:column headerText="Acordo">
+				<p:column headerText="Acordo" sortBy="#{negocio.acordo}">
+					<h:outputText value="#{negocio.acordo}" />
 				</p:column>
-				<p:column headerText="Tipo">
+				<p:column headerText="Tipo" sortBy="#{negocio.tipo}">
+					<h:outputText value="#{negocio.tipo}" />
 				</p:column>
 			</p:dataTable>
 		</p:panel>
@@ -36,20 +46,20 @@
 
 	<p:dialog header="Negócio - Cadastro" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="cadastro">
+			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel value="Item:" />
 				<p:selectOneMenu filter="true">
-					<f:selectItem itemLabel="Selecione um Item" itemValue=""/>
+					<f:selectItem itemLabel="Selecione um Item" itemValue="#{negocioBean.negocio.item}"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="Cliente" />
 				<p:selectOneMenu filter="true">
-					<f:selectItem itemLabel="Selecione um Cliente" itemValue=""/>
+					<f:selectItem itemLabel="Selecione um Cliente" itemValue="#{negocioBean.negocio.cliente}"/>
 				</p:selectOneMenu>
-				<p:outputLabel value="Data:" />
-				<p:calendar />
+				<p:outputLabel value="Data:"/>
+				<p:calendar value="#{negocioBean.negocio.data}"/>
 				<p:outputLabel value="Valor:" />
-				<p:inputText size="14" maxlength="7"/>
+				<p:inputText size="14" maxlength="7" value="#{negocioBean.negocio.valor}"/>
 				<p:outputLabel value="Acordo:" />
 				<p:selectBooleanCheckbox />
 				<p:outputLabel value="Tipo:" />
@@ -59,7 +69,7 @@
 				</p:selectOneRadio>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" />
+				<p:commandButton value="Salvar" actionListener="#{negocioBean.salvar()}" update=":mensagem :cadastro:painel"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 			</h:panelGrid>
 		</h:form>
