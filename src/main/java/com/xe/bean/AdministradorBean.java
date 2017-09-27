@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -64,5 +65,10 @@ public class AdministradorBean implements Serializable{
 			Messages.addGlobalError("Erro: Administrador não foi salva");
 			erro.printStackTrace();
 		}
+	}
+	
+	public void excluir(ActionEvent evento) {
+		administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
+		Messages.addGlobalInfo(administrador.getNome());
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -50,19 +51,13 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	public void novo() {
-		System.out.println("qui1");
 		usuario = new Usuario();
-		System.out.println("qui2");
 	}
 	
 	public void salvar() {
-		System.out.println("here0");
 		try {
-			System.out.println("here1");
 			PessoaDAO dao = new PessoaDAO();
-			System.out.println("here2");
 			dao.salvar(usuario);
-			System.out.println("here3");
 			novo();
 			Messages.addGlobalInfo("Usuário foi adicionado corretamente");
 		}
@@ -70,6 +65,11 @@ public class UsuarioBean implements Serializable {
 			Messages.addGlobalError("Erro: Usuário não foi salva");
 			erro.printStackTrace();
 		}
+	}
+	
+	public void excluir(ActionEvent evento) {
+		usuario = (Usuario) evento.getComponent().getAttributes().get("escolhido");
+		Messages.addGlobalInfo(usuario.getNome());
 	}
 	
 }

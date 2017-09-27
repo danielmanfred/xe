@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
@@ -63,5 +64,10 @@ public class ItemBean implements Serializable {
 			Messages.addGlobalError("Erro: Item não foi salva");
 			erro.printStackTrace();
 		}
+	}
+	
+	public void excluir(ActionEvent evento) {
+		item = (Item) evento.getComponent().getAttributes().get("escolhido");
+		Messages.addGlobalInfo(item.getNome());
 	}
 }
