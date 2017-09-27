@@ -3,7 +3,7 @@
 Integrantes: 
 - Daniel Tiago
 - Adonias Galvão
-- Anttogony Ramon
+- Anttogony Ramon Oliveira
 
 Projeto da disciplina Projeto de Software
 
