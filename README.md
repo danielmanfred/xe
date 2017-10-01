@@ -7,8 +7,13 @@ Integrantes:
 - Anttogony Ramon Oliveira
 
 Projeto da disciplina Projeto de Software
+
 Aplicação Web 
 Aplicação para Android
+
+Desenvolvido na linguagem Java
+
+Tecnologias utilizadas:
 
 Os vídeos da apresentação da 2ª Sprint do projeto encontra-se no Youtube.
 Segue o link do vídeo: https://www.youtube.com/watch?v=SIdSlu9F-ys
