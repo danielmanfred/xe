@@ -1,0 +1,159 @@
+[33mcommit e92fdf244f9a4def7683ca7a1fdfbb69f59974f7[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Oct 1 09:19:10 2017 -0300
+
+    Mudando subtitulo
+
+[33mcommit 963c3da71c32bc8966e1209c1943e89ba9d42347[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Wed Sep 27 03:10:12 2017 -0300
+
+    Tentando de novo
+
+[33mcommit 9ecb527360d0dd9944dcf95cce84ab07927b62d1[m
+Author: Anttogony <31479828+Anttogony@users.noreply.github.com>
+Date:   Wed Sep 27 02:11:21 2017 -0300
+
+    Update README.md
+
+[33mcommit d14edae88a2fce0ff203cec8a9b720a4360dcbdd[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Mon Sep 25 07:03:16 2017 -0300
+
+    Atualização do diagrama de classes
+
+[33mcommit 609ae6564caad3588a01a6eb95ccf2bcc3b8c935[m
+Merge: 0a9be6c e0c60ba
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 24 23:19:29 2017 -0300
+
+    Merge branch 'master' of https://github.com/danielmanfred/xe
+
+[33mcommit 0a9be6cba2b70ec9f01b7cb48e2af4e7110b4a1e[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 24 23:16:42 2017 -0300
+
+    Listagem pronta
+
+[33mcommit e0c60ba98fd2e6df8169d5db7451f9920295e485[m
+Merge: 206bd07 8590287
+Author: Iago Galvão <arauujoiago@gmail.com>
+Date:   Sun Sep 24 19:55:29 2017 -0300
+
+    Merge branch 'master' of https://github.com/danielmanfred/xe
+
+[33mcommit 206bd07bb57a3076d6b273dace17b1d5995ac8af[m
+Author: Iago Galvão <arauujoiago@gmail.com>
+Date:   Sun Sep 24 19:42:58 2017 -0300
+
+    Diagrama para a 2 spring atualizado
+
+[33mcommit 8590287b22337ae994a93f0f570bffc78d4dab6c[m
+Author: Anttogony <31479828+Anttogony@users.noreply.github.com>
+Date:   Sun Sep 24 18:14:12 2017 -0300
+
+    Update README.md
+
+[33mcommit 4796481e95097072535854805bc286ae66ac1de0[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 24 16:50:38 2017 -0300
+
+    novas telas
+
+[33mcommit 46ca101e5653d5eafb8376a05ab34ff52ead3b15[m
+Merge: f1fb665 776f16d
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sat Sep 23 16:53:42 2017 -0300
+
+    Campos de tela
+
+[33mcommit f1fb6654b6ad81a0efbd6dd91d2fe21a5ace668b[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sat Sep 23 16:21:22 2017 -0300
+
+    Inserções na tela
+
+[33mcommit 776f16da772d28bfda406fba5b180a2676286845[m
+Author: Iago Galvão <arauujoiago@gmail.com>
+Date:   Sat Sep 23 15:37:19 2017 -0300
+
+    coloquei meu nome
+
+[33mcommit 43757a792536e909323fc91fce1cfbab931954ca[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 17 23:57:05 2017 -0300
+
+    Criação das páginas das entidades
+
+[33mcommit 4f2dce1d1a98c271c2e02d2c0d5fee25e1cd108b[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sat Sep 16 22:49:42 2017 -0300
+
+    Tela do administrador
+
+[33mcommit 06ca4997681987fb888d6b5f83d7e44c27441323[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sat Sep 16 00:54:52 2017 -0300
+
+    Testando o PrimeFaces
+
+[33mcommit 398848c8297eaa0872616abe9b2ca6e790bcd132[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Mon Sep 11 23:21:13 2017 -0300
+
+    Teste com o JSF
+
+[33mcommit 0c1912fcbb329e1eb37631559a263017ba9ac2fd[m
+Merge: dec2b0d 46c39e8
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 10 20:52:53 2017 -0300
+
+    Merge branch 'master' of https://github.com/danielmanfred/xe
+
+[33mcommit dec2b0d18bdebb984cd5c7898c6708d11ae738dd[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 10 20:49:21 2017 -0300
+
+    Finalização dos testes
+
+[33mcommit 46c39e8247f336e1f27befb2ec1bb5214911a976[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Thu Sep 7 16:58:36 2017 -0300
+
+    Playlist
+
+[33mcommit 18331950408358fac4d1a302f1523393e07409d0[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Thu Sep 7 10:06:21 2017 -0300
+
+    Criação do README
+
+[33mcommit 75aac0d916047daf231aa5fc78f551655ffc7edf[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Wed Sep 6 22:35:58 2017 -0300
+
+    Testes unitários
+
+[33mcommit 4127539eef21614853946bbdd78419cfa0a95479[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Sep 3 14:20:35 2017 -0300
+
+    Criacão do CRUD
+
+[33mcommit d0368d7250b94f61158c677e6bd7802adcf80982[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Mon Aug 28 04:54:37 2017 -0300
+
+    Criacao do dominio
+
+[33mcommit cd5ffe980eec3da2a6506e2f811dc71508e232ac[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Aug 27 22:45:23 2017 -0300
+
+    Diagramas da UML
+
+[33mcommit 692d2050abe1574a640ddb8312c74f6938610431[m
+Author: danielmanfred <danielmanfred@gmail.com>
+Date:   Sun Aug 27 02:12:22 2017 -0300
+
+    Iniciando o projeto xe

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Xé 
+=======
+# Xé - Economia Compartilhada
+>>>>>>> dm
 
 Integrantes: 
 - Daniel Tiago
