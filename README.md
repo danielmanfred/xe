@@ -1,4 +1,4 @@
-# xe
+# Xé - Economia Compartilhada
 
 Integrantes: 
 - Daniel Tiago
