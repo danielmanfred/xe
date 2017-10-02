@@ -59,6 +59,7 @@ public class UsuarioBean implements Serializable {
 			PessoaDAO dao = new PessoaDAO();
 			dao.salvar(usuario);
 			novo();
+			listar();
 			Messages.addGlobalInfo("Usuário foi adicionado corretamente");
 		}
 		catch(RuntimeException erro) {
@@ -68,8 +69,17 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	public void excluir(ActionEvent evento) {
-		usuario = (Usuario) evento.getComponent().getAttributes().get("escolhido");
-		Messages.addGlobalInfo(usuario.getNome());
+		try {
+			usuario = (Usuario) evento.getComponent().getAttributes().get("escolhido");
+			PessoaDAO dao = new PessoaDAO();
+			dao.excluir(usuario);		
+			Messages.addGlobalInfo("O objeto foi removido");
+			listar();
+		}
+		catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
+			erro.printStackTrace();
+		}
 	}
 	
 }

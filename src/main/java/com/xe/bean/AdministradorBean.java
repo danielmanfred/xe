@@ -59,6 +59,7 @@ public class AdministradorBean implements Serializable{
 			PessoaDAO pessoaDAO = new PessoaDAO();
 			pessoaDAO.salvar(administrador);		
 			novo();
+			listar();
 			Messages.addGlobalInfo("Administrador foi adicionado corretamente");
 		}
 		catch(RuntimeException erro) {
@@ -68,7 +69,20 @@ public class AdministradorBean implements Serializable{
 	}
 	
 	public void excluir(ActionEvent evento) {
-		administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
-		Messages.addGlobalInfo(administrador.getNome());
+		try {
+			administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
+			AdministradorDAO administradorDAO = new AdministradorDAO();
+			administradorDAO.excluir(administrador);
+			Messages.addGlobalInfo("O objeto foi removido");
+			listar();
+		}
+		catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
+			erro.printStackTrace();
+		}
+	}
+	
+	public void editar(ActionEvent evento) {
+		
 	}
 }

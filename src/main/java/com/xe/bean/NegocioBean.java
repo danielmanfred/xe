@@ -59,6 +59,7 @@ public class NegocioBean implements Serializable {
 			NegocioDAO negocioDAO = new NegocioDAO();
 			negocioDAO.salvar(negocio);
 			novo();
+			listar();
 			Messages.addGlobalInfo("Negocio foi adicionado corretamente");
 		}
 		catch(RuntimeException erro) {
@@ -68,7 +69,16 @@ public class NegocioBean implements Serializable {
 	}
 	
 	public void excluir(ActionEvent evento) {
-		negocio = (Negocio) evento.getComponent().getAttributes().get("escolhido");
-		Messages.addGlobalInfo(negocio.getItem().getNome());
+		try {
+			negocio = (Negocio) evento.getComponent().getAttributes().get("escolhido");
+			NegocioDAO negocioDAO = new NegocioDAO();
+			negocioDAO.excluir(negocio);		
+			Messages.addGlobalInfo("O objeto foi removido");
+			listar();
+		}
+		catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
+			erro.printStackTrace();
+		}
 	}
 }

@@ -11,9 +11,9 @@
 <h:body>
 	<p:growl id="mensagem"/>
 
-	<h:form>	
+	<h:form id="formListagem">	
 		<p:panel header="Negócio - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
+			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
 				paginator="true" value="#{negocioBean.negocios}" var="negocio" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{negocioBean.novo()}"
@@ -23,10 +23,10 @@
 					<h:outputText value="#{negocio.codigo}" />
 				</p:column>
 				<p:column headerText="Item" sortBy="#{negocio.item}">
-					<h:outputText value="#{negocio.item}" />
+					<h:outputText value="#{negocio.item.nome}" />
 				</p:column>
 				<p:column headerText="Cliente" sortBy="#{negocio.cliente}">
-					<h:outputText value="#{negocio.cliente}" />
+					<h:outputText value="#{negocio.cliente.nome}" />
 				</p:column>
 				<p:column headerText="Data" sortBy="#{negocio.data}">
 					<h:outputText value="#{negocio.data}" />
@@ -41,7 +41,8 @@
 					<h:outputText value="#{negocio.tipo}" />
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash"  actionListener="#{negocioBean.excluir}" update=":mensagem">
+					<p:commandButton icon="ui-icon-trash"  actionListener="#{negocioBean.excluir}" 
+						update=":mensagem :formListagem:tabela">
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{negocio}"/>
 					</p:commandButton>
@@ -80,7 +81,8 @@
 				</p:selectOneRadio>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{negocioBean.salvar()}" update=":mensagem :cadastro:painel"/>
+				<p:commandButton value="Salvar" actionListener="#{negocioBean.salvar()}" 
+					update=":mensagem :cadastro:painel :formListagem:tabela"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 			</h:panelGrid>
 		</h:form>

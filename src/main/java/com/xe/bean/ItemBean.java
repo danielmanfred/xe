@@ -58,6 +58,7 @@ public class ItemBean implements Serializable {
 			ItemDAO itemDAO = new ItemDAO();
 			itemDAO.salvar(item);		
 			novo();
+			listar();
 			Messages.addGlobalInfo("Item foi adicionado corretamente");
 		}
 		catch(RuntimeException erro) {
@@ -67,7 +68,16 @@ public class ItemBean implements Serializable {
 	}
 	
 	public void excluir(ActionEvent evento) {
-		item = (Item) evento.getComponent().getAttributes().get("escolhido");
-		Messages.addGlobalInfo(item.getNome());
+		try {
+			item = (Item) evento.getComponent().getAttributes().get("escolhido");
+			ItemDAO itemDAO = new ItemDAO();
+			itemDAO.excluir(item);		
+			Messages.addGlobalInfo("O objeto foi removido");
+			listar();
+		}
+		catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
+			erro.printStackTrace();
+		}
 	}
 }

@@ -11,9 +11,9 @@
 <h:body>
 	<p:growl id="mensagem"/>
 
-	<h:form>
+	<h:form id="formListagem">
 		<p:panel header="Categoria - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
+			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
 				paginator="true" value="#{categoriaBean.categorias}" var="categoria" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{categoriaBean.novo()}" 
@@ -26,7 +26,8 @@
 					<h:outputText value="#{categoria.nome}" />
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash" actionListener="#{categoriaBean.excluir}" update=":mensagem">
+					<p:commandButton icon="ui-icon-trash" actionListener="#{categoriaBean.excluir}" 
+						update=":mensagem :formListagem:tabela">
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{categoria}"/>
 					</p:commandButton>
@@ -48,7 +49,8 @@
 				<p:inputText size="30" maxlength="50" value="#{categoriaBean.categoria.nome}"/>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{categoriaBean.salvar}" update=":mensagem :cadastro:painel"/>
+				<p:commandButton value="Salvar" actionListener="#{categoriaBean.salvar}" 
+					update=":mensagem :cadastro:painel :formListagem:tabela"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 			</h:panelGrid>
 		</h:form>

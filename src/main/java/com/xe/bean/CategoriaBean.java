@@ -58,6 +58,7 @@ public class CategoriaBean implements Serializable{
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
 			categoriaDAO.salvar(categoria);		
 			novo();
+			listar();
 			Messages.addGlobalInfo("Categoria foi adicionado corretamente");
 		}
 		catch(RuntimeException erro) {
@@ -67,7 +68,16 @@ public class CategoriaBean implements Serializable{
 	}
 	
 	public void excluir(ActionEvent evento) {
-		categoria = (Categoria) evento.getComponent().getAttributes().get("escolhido");
-		Messages.addGlobalInfo(categoria.getNome());
+		try {
+			categoria = (Categoria) evento.getComponent().getAttributes().get("escolhido");
+			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			categoriaDAO.excluir(categoria);
+			Messages.addGlobalInfo("O objeto foi removido");
+			listar();
+		}
+		catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
+			erro.printStackTrace();
+		}	
 	}
 }

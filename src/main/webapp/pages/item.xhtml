@@ -11,9 +11,9 @@
 <h:body>
 	<p:growl id="mensagem"/>
 
-	<h:form>
+	<h:form id="formListagem">
 		<p:panel header="Item - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
+			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
 				paginator="true" value="#{itemBean.itens}" var="item" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{itemBean.novo()}" 
@@ -26,18 +26,21 @@
 					<h:outputText value="#{item.nome}" />
 				</p:column>
 				<p:column headerText="Servidor" sortBy="#{item.servidor}">
-					<h:outputText value="#{item.servidor}" />
+					<h:outputText value="#{item.servidor.nome}" />
 				</p:column>
 				<p:column headerText="Quantidade" sortBy="#{item.quantidade}">
 					<h:outputText value="#{item.quantidade}" />
 				</p:column>
 				<p:column headerText="Categoria" sortBy="#{item.categoria}">
-					<h:outputText value="#{item.categoria}" />
+					<h:outputText value="#{item.categoria.nome}" />
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash" actionListener="#{itemBean.excluir}" update=":mensagem">
+					<p:commandButton icon="ui-icon-trash" actionListener="#{itemBean.excluir}" 
+						update=":mensagem :formListagem:tabela">
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{item}"/>
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil">
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -67,7 +70,8 @@
 				</p:selectOneMenu>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{itemBean.salvar()}" update=":mensagem :cadastro:painel"/>
+				<p:commandButton value="Salvar" actionListener="#{itemBean.salvar()}" 
+					update=":mensagem :cadastro:painel :formListagem:tabela"/>
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
 			</h:panelGrid>
 		</h:form>
