@@ -17,7 +17,9 @@
 				paginator="true" value="#{negocioBean.negocios}" var="negocio" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{negocioBean.novo()}"
-						update=":cadastro:painel"/>
+						update=":mensagem :cadastro:painel">
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />		
+					</p:commandButton>
 				</f:facet>
 				<p:column headerText="Código" sortBy="#{negocio.codigo}">
 					<h:outputText value="#{negocio.codigo}" />
@@ -32,7 +34,9 @@
 					<h:outputText value="#{negocio.data}" />
 				</p:column>
 				<p:column headerText="Valor" sortBy="#{negocio.valor}">
-					<h:outputText value="#{negocio.valor}" />
+					<h:outputText value="#{negocio.valor}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
 				</p:column>
 				<p:column headerText="Acordo" sortBy="#{negocio.acordo}">
 					<h:outputText value="#{negocio.acordo}" />
@@ -45,6 +49,11 @@
 						update=":mensagem :formListagem:tabela">
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{negocio}"/>
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" actionListener="#{negocioBean.editar}"
+						update=":mensagem :cadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="escolhido" value="#{negocio}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -60,22 +69,39 @@
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form id="cadastro">
 			<h:panelGrid id="painel" columns="2">
-				<p:outputLabel value="Item:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemLabel="Selecione um Item" itemValue="#{negocioBean.negocio.item}"/>
+				
+				<p:outputLabel value="Item:" for="item"/>
+				<p:selectOneMenu id="item" filter="true" value="#{negocioBean.negocio.item}" converter="omnifaces.SelectItemsConverter"
+					required="true" requiredMessage="É necessário selecionar um item">
+					<f:selectItem itemLabel="Selecione um Item" noSelectionOption="true"/>
+					<f:selectItems value="#{negocioBean.itens}" var="item" itemLabel="#{item.nome}" itemValue="#{item}"/>
 				</p:selectOneMenu>
-				<p:outputLabel value="Cliente" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemLabel="Selecione um Cliente" itemValue="#{negocioBean.negocio.cliente}"/>
+				
+				<p:outputLabel value="Cliente" for="cliente"/>
+				<p:selectOneMenu id="cliente" filter="true" value="#{negocioBean.negocio.cliente}" converter="omnifaces.SelectItemsConverter"
+					required="true" requiredMessage="É necessário selecionar um cliente">
+					<f:selectItem itemLabel="Selecione um Cliente" noSelectionOption="true"/>
+					<f:selectItems value="#{negocioBean.clientes}" var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}"/>
 				</p:selectOneMenu>
-				<p:outputLabel value="Data:"/>
-				<p:calendar value="#{negocioBean.negocio.data}"/>
-				<p:outputLabel value="Valor:" />
-				<p:inputText size="14" maxlength="7" value="#{negocioBean.negocio.valor}"/>
-				<p:outputLabel value="Acordo:" />
-				<p:selectBooleanCheckbox />
-				<p:outputLabel value="Tipo:" />
-				<p:selectOneRadio>
+				
+				<p:outputLabel value="Data:" for="data"/>
+				<p:calendar id="data" value="#{negocioBean.negocio.data}" required="true" 
+					requiredMessage="É necessário informar a data da negociação"/>
+				
+				<p:outputLabel value="Valor:" for="valor"/>
+				<p:inputText id="valor" size="14" maxlength="7" value="#{negocioBean.negocio.valor}" required="true"
+					requiredMessage="É necessário informar o valor do intem"
+					converterMessage="Valor não válido"
+					validatorMessage="O valor deve ser acima de 1 centavo">
+					<f:validateDoubleRange minimum="0.01"/>
+					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+				</p:inputText>
+				
+				<p:outputLabel value="Acordo:" for="acordo"/>
+				<p:selectBooleanCheckbox id="acordo"/>
+				
+				<p:outputLabel value="Tipo:" for="tipo"/>
+				<p:selectOneRadio id="tipo" required="true" requiredMessage="É necessário preencher o tipo do usuário">
 					<f:selectItem itemLabel="Administrador" itemValue="A"/>
 					<f:selectItem itemLabel="Usuário" itemValue="U"/>
 				</p:selectOneRadio>

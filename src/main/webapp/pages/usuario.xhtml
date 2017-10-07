@@ -17,7 +17,9 @@
 				paginator="true" value="#{usuarioBean.usuarios}" var="usuario" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{usuarioBean.novo()}"
-						update=":cadastro:painel"/>
+						update=":cadastro:painel">
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />		
+					</p:commandButton>
 				</f:facet>
 				<p:column headerText="Código">
 					<h:outputText value="#{usuario.codigo}" />
@@ -40,6 +42,11 @@
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{usuario}"/>
 					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" actionListener="#{usuarioBean.editar}"
+						update=":cadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="escolhido" value="#{usuario}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 			
@@ -54,14 +61,17 @@
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form id="cadastro">
 			<h:panelGrid id="painel" columns="2">
-				<p:outputLabel value="Nome:"/>
-				<p:inputText size="30" maxlength="50" value="#{usuarioBean.usuario.nome}"/>
-				<p:outputLabel value="Matrícula:" />
-				<p:inputText size="15" maxlength="10" value="#{usuarioBean.usuario.matricula}"/>
-				<p:outputLabel value="Senha:" />
-				<p:password size="10" maxlength="8" value="#{usuarioBean.usuario.senha}"/>
-				<p:outputLabel value="Nota:" />
-				<p:inputText size="8" maxlength="4" value="#{usuarioBean.usuario.nota}"/>
+				<p:outputLabel value="Nome:" for="nome"/>
+				<p:inputText id="nome" size="30" maxlength="50" value="#{usuarioBean.usuario.nome}" required="true"
+					requiredMessage="O campo 'nome' não pode estar vazio"/>
+				<p:outputLabel value="Matrícula:" for="matricula"/>
+				<p:inputText id="matricula" size="15" maxlength="10" value="#{usuarioBean.usuario.matricula}" required="true"
+					requiredMessage="O campo 'matricula' não pode estar vazio"/>
+				<p:outputLabel value="Senha:" for="senha"/>
+				<p:password id="senha" size="10" maxlength="8" value="#{usuarioBean.usuario.senha}" required="true"
+					requiredMessage="O campo 'senha' não pode estar vazio"/>
+				<p:outputLabel value="Nota:" for="nota"/>
+				<p:inputText id="nota" size="8" maxlength="4" value="#{usuarioBean.usuario.nota}"/>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar()}"

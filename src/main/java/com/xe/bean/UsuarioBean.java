@@ -57,10 +57,10 @@ public class UsuarioBean implements Serializable {
 	public void salvar() {
 		try {
 			PessoaDAO dao = new PessoaDAO();
-			dao.salvar(usuario);
+			dao.merge(usuario);
 			novo();
 			listar();
-			Messages.addGlobalInfo("Usuário foi adicionado corretamente");
+			Messages.addGlobalInfo("Usuário foi salvo corretamente");
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro: Usuário não foi salva");
@@ -82,4 +82,7 @@ public class UsuarioBean implements Serializable {
 		}
 	}
 	
+	public void editar(ActionEvent evento) {
+		usuario = (Usuario) evento.getComponent().getAttributes().get("escolhido");
+	}
 }

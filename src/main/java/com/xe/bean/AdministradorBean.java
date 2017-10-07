@@ -57,10 +57,10 @@ public class AdministradorBean implements Serializable{
 	public void salvar() {
 		try {
 			PessoaDAO pessoaDAO = new PessoaDAO();
-			pessoaDAO.salvar(administrador);		
+			pessoaDAO.merge(administrador);		
 			novo();
 			listar();
-			Messages.addGlobalInfo("Administrador foi adicionado corretamente");
+			Messages.addGlobalInfo("Administrador foi salvo corretamente");
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro: Administrador não foi salva");
@@ -83,6 +83,6 @@ public class AdministradorBean implements Serializable{
 	}
 	
 	public void editar(ActionEvent evento) {
-		
+		administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
 	}
 }

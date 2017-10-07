@@ -17,7 +17,9 @@
 				paginator="true" value="#{categoriaBean.categorias}" var="categoria" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{categoriaBean.novo()}" 
-						update=":cadastro:painel"/>	
+						update=":cadastro:painel">
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />		
+					</p:commandButton>	
 				</f:facet>
 				<p:column headerText="Código" sortBy="#{categoria.codigo}">
 					<h:outputText value="#{categoria.codigo}" />
@@ -30,6 +32,11 @@
 						update=":mensagem :formListagem:tabela">
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{categoria}"/>
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" actionListener="#{categoriaBean.editar}"
+						update=":cadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="escolhido" value="#{categoria}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -45,8 +52,9 @@
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form id="cadastro">
 			<h:panelGrid id="painel" columns="2">
-				<p:outputLabel value="Nome:" />
-				<p:inputText size="30" maxlength="50" value="#{categoriaBean.categoria.nome}"/>
+				<p:outputLabel value="Nome:" for="nome"/>
+				<p:inputText id="nome" size="30" maxlength="50" value="#{categoriaBean.categoria.nome}" required="true"
+					requiredMessage="O campo 'nome' não pode estar vazio"/>
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" actionListener="#{categoriaBean.salvar}" 

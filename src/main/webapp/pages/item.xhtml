@@ -17,7 +17,9 @@
 				paginator="true" value="#{itemBean.itens}" var="item" rows="10">
 				<f:facet name="header">
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{itemBean.novo()}" 
-						update=":cadastro:painel"/>
+						update=":mensagem :cadastro:painel">
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />		
+					</p:commandButton>
 				</f:facet>
 				<p:column headerText="Código" sortBy="#{item.codigo}">
 					<h:outputText value="#{item.codigo}" />
@@ -40,7 +42,10 @@
 						<p:confirm header="Confirmação" message="Você está certo disso?" icon="ui-icon-alert"/>
 						<f:attribute name="escolhido" value="#{item}"/>
 					</p:commandButton>
-					<p:commandButton icon="ui-icon-pencil">
+					<p:commandButton icon="ui-icon-pencil" actionListener="#{itemBean.editar}"
+						update=":mensagem :cadastro:painel" oncomplete="PF('dialogo').show();">
+						<f:attribute name="escolhido" value="#{item}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -56,17 +61,31 @@
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form id="cadastro">
 			<h:panelGrid id="painel" columns="2">
-				<p:outputLabel value="Nome:" />
-				<p:inputText size="30" maxlength="50" value="#{itemBean.item.nome}"/>
-				<p:outputLabel value="Quantidade:" />
-				<p:inputText size="10" maxlength="4" value="#{itemBean.item.quantidade}"/>
-				<p:outputLabel value="Servidor:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemLabel="Selecione um servidor" itemValue="#{itemBean.item.servidor}"/>
+				
+				<p:outputLabel value="Nome:" for="nome"/>
+				<p:inputText id="nome" size="30" maxlength="50" value="#{itemBean.item.nome}" required="true" 
+					requiredMessage="O campo 'nome' não pode estar vazio"/>
+				
+				<p:outputLabel value="Quantidade:" for="quantidade"/>
+				<p:inputText id="quantidade" size="10" maxlength="4" value="#{itemBean.item.quantidade}" required="true"
+					requiredMessage="É necessário preencher o campo quantidade"
+					converterMessage="Quantidade inválida"
+					validatorMessage="A quantidade deve estar entre os valores 1 e 50">
+					<f:validateLongRange minimum="1" maximum="50"/>	
+				</p:inputText>
+				
+				<p:outputLabel value="Servidor:" for="servidor"/>
+				<p:selectOneMenu id="servidor" filter="true" value="#{itemBean.item.servidor}" converter="omnifaces.SelectItemsConverter"
+					required="true" requiredMessage="É necessário selecionar um servidor">
+					<f:selectItem itemLabel="Selecione um servidor" noSelectionOption="true"/>
+					<f:selectItems value="#{itemBean.servidores}" var="servidor" itemLabel="#{servidor.nome}" itemValue="#{servidor}"/>	
 				</p:selectOneMenu>
-				<p:outputLabel value="Categoria:" />
-				<p:selectOneMenu filter="true">
-					<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{itemBean.item.categoria}"/>
+				
+				<p:outputLabel value="Categoria:" for="categoria"/>
+				<p:selectOneMenu id="categoria" filter="true" value="#{itemBean.item.categoria}" converter="omnifaces.SelectItemsConverter"
+					required="true" requiredMessage="É necessário selecionar uma categoria">
+					<f:selectItem itemLabel="Selecione uma Categoria" noSelectionOption="true"/>
+					<f:selectItems value="#{itemBean.categorias}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}"/>
 				</p:selectOneMenu>
 			</h:panelGrid>
 			<h:panelGrid columns="2">

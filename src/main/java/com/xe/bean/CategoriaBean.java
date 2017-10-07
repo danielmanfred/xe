@@ -56,10 +56,10 @@ public class CategoriaBean implements Serializable{
 	public void salvar() {
 		try {
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			categoriaDAO.salvar(categoria);		
+			categoriaDAO.merge(categoria);		
 			novo();
 			listar();
-			Messages.addGlobalInfo("Categoria foi adicionado corretamente");
+			Messages.addGlobalInfo("Categoria foi salvo corretamente");
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro: Categoria não foi salva");
@@ -79,5 +79,9 @@ public class CategoriaBean implements Serializable{
 			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
 			erro.printStackTrace();
 		}	
+	}
+	
+	public void editar(ActionEvent evento) {
+		categoria = (Categoria) evento.getComponent().getAttributes().get("escolhido");
 	}
 }

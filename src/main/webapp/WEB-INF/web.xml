@@ -23,5 +23,10 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <!-- Processamento do Hibernate -->
+    <listener>
+    	<listener-class>com.xe.util.HibernateContext</listener-class>
+    </listener>
 	
 </web-app>
