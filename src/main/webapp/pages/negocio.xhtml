@@ -7,6 +7,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Negócio</title>
+	<h:outputScript library="js" name="scripts.js"/>
 </h:head>
 <h:body>
 	<p:growl id="mensagem"/>
@@ -16,10 +17,12 @@
 			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
 				paginator="true" value="#{negocioBean.negocios}" var="negocio" rows="10">
 				<f:facet name="header">
+					
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" actionListener="#{negocioBean.novo()}"
 						update=":mensagem :cadastro:painel">
 						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />		
 					</p:commandButton>
+					
 				</f:facet>
 				<p:column headerText="Código" sortBy="#{negocio.codigo}">
 					<h:outputText value="#{negocio.codigo}" />
@@ -30,19 +33,21 @@
 				<p:column headerText="Cliente" sortBy="#{negocio.cliente}">
 					<h:outputText value="#{negocio.cliente.nome}" />
 				</p:column>
-				<p:column headerText="Data" sortBy="#{negocio.data}">
-					<h:outputText value="#{negocio.data}" />
+				<p:column headerText="Data">
+					<h:outputText value="#{negocio.data}">
+						<f:convertDateTime locale="pt_BR"/>
+					</h:outputText>
 				</p:column>
-				<p:column headerText="Valor" sortBy="#{negocio.valor}">
+				<p:column headerText="Valor">
 					<h:outputText value="#{negocio.valor}">
 						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
 					</h:outputText>
 				</p:column>
-				<p:column headerText="Acordo" sortBy="#{negocio.acordo}">
-					<h:outputText value="#{negocio.acordo}" />
+				<p:column headerText="Acordo">
+					<h:outputText value="#{negocio.formatAcordo}" />
 				</p:column>
-				<p:column headerText="Tipo" sortBy="#{negocio.tipo}">
-					<h:outputText value="#{negocio.tipo}" />
+				<p:column headerText="Tipo">
+					<h:outputText value="#{negocio.formatTipo}" />
 				</p:column>
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-trash"  actionListener="#{negocioBean.excluir}" 
@@ -85,7 +90,7 @@
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="Data:" for="data"/>
-				<p:calendar id="data" value="#{negocioBean.negocio.data}" required="true" 
+				<p:calendar id="data" value="#{negocioBean.negocio.data}" size="10" locale="pt_BR" required="true" 
 					requiredMessage="É necessário informar a data da negociação"/>
 				
 				<p:outputLabel value="Valor:" for="valor"/>
@@ -98,10 +103,11 @@
 				</p:inputText>
 				
 				<p:outputLabel value="Acordo:" for="acordo"/>
-				<p:selectBooleanCheckbox id="acordo"/>
+				<p:selectBooleanCheckbox id="acordo" value="#{negocioBean.negocio.acordo}"/>
 				
 				<p:outputLabel value="Tipo:" for="tipo"/>
-				<p:selectOneRadio id="tipo" required="true" requiredMessage="É necessário preencher o tipo do usuário">
+				<p:selectOneRadio id="tipo" value="#{negocioBean.negocio.tipo}" required="true" 
+					requiredMessage="É necessário preencher o tipo do usuário">
 					<f:selectItem itemLabel="Administrador" itemValue="A"/>
 					<f:selectItem itemLabel="Usuário" itemValue="U"/>
 				</p:selectOneRadio>

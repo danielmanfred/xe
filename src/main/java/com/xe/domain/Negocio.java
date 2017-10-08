@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
@@ -35,6 +36,11 @@ public class Negocio extends GenericDomain {
 	@Column(nullable = false)
 	private Character tipo;
 
+	public Negocio() {
+		
+		
+	}
+	
 	public Item getItem() {
 		return item;
 	}
@@ -83,5 +89,28 @@ public class Negocio extends GenericDomain {
 		this.tipo = tipo;
 	}
 	
+	@Transient
+	public String getFormatTipo() {
+		String formatTipo = null;
+		
+		if (tipo == 'A') {
+			formatTipo = "Administrador";
+		}
+		else {
+			formatTipo = "Usuario";
+		}
+		
+		return formatTipo;
+	}
 	
+	@Transient
+	public String getFormatAcordo() {
+		String formatAcordo = "Inativado";
+		
+		if (acordo) {
+			formatAcordo = "Ativado";
+		}
+		
+		return formatAcordo;
+	}
 }

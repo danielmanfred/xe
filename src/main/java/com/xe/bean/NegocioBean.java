@@ -96,8 +96,8 @@ public class NegocioBean implements Serializable {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			ItemDAO itemDAO = new ItemDAO();
-			clientes = usuarioDAO.listar();
-			itens = itemDAO.listar();
+			clientes = usuarioDAO.listar("nome");
+			itens = itemDAO.listar("nome");
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro na listagem de clientes ou itens");
@@ -107,16 +107,13 @@ public class NegocioBean implements Serializable {
 	
 	public void salvar() {
 		try {
-			System.out.println("l0");
 			NegocioDAO negocioDAO = new NegocioDAO();
-			System.out.println("l1");
 			negocioDAO.merge(negocio);
-			System.out.println("l2");
 			negocio = new Negocio();
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			ItemDAO itemDAO = new ItemDAO();
 			clientes = usuarioDAO.listar();
-			itens = itemDAO.listar();
+			itens = itemDAO.listar(); 
 			
 			negocios = negocioDAO.listar();
 			Messages.addGlobalInfo("Negocio foi salvo corretamente");

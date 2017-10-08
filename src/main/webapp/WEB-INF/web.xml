@@ -6,27 +6,39 @@
 
 	<!-- Nome da Aplicação -->
 	<display-name>Xe</display-name>
-	
+
 	<!-- Estágio do projeto -->
 	<context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
-	
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<!-- Tema do PrimeFaces -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>mint-choc</param-value>
+	</context-param>
+
+	<!-- Upload do PrimeFaces -->
+	<context-param>
+		<param-name>primefaces.UPLOADER</param-name>
+		<param-value>native</param-value>
+	</context-param>
+
 	<!-- Configuração do JSF -->
 	<servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
-    
-    <!-- Processamento do Hibernate -->
-    <listener>
-    	<listener-class>com.xe.util.HibernateContext</listener-class>
-    </listener>
-	
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<!-- Processamento do Hibernate -->
+	<listener>
+		<listener-class>com.xe.util.HibernateContext</listener-class>
+	</listener>
+
 </web-app>

@@ -61,17 +61,25 @@
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form id="cadastro">
 			<h:panelGrid id="painel" columns="2">
+				
 				<p:outputLabel value="Nome:" for="nome"/>
 				<p:inputText id="nome" size="30" maxlength="50" value="#{usuarioBean.usuario.nome}" required="true"
 					requiredMessage="O campo 'nome' não pode estar vazio"/>
+				
 				<p:outputLabel value="Matrícula:" for="matricula"/>
 				<p:inputText id="matricula" size="15" maxlength="10" value="#{usuarioBean.usuario.matricula}" required="true"
 					requiredMessage="O campo 'matricula' não pode estar vazio"/>
+				
 				<p:outputLabel value="Senha:" for="senha"/>
 				<p:password id="senha" size="10" maxlength="8" value="#{usuarioBean.usuario.senha}" required="true"
-					requiredMessage="O campo 'senha' não pode estar vazio"/>
+					requiredMessage="O campo 'senha' não pode estar vazio" 
+					validatorMessage="A senha deve ter entre 6 e 10 caracteres">
+					<f:validateLength minimum="6" maximum="8"/>
+				</p:password>
+				
 				<p:outputLabel value="Nota:" for="nota"/>
 				<p:inputText id="nota" size="8" maxlength="4" value="#{usuarioBean.usuario.nota}"/>
+				
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvar()}"

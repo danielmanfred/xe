@@ -17,43 +17,42 @@ import com.xe.domain.Administrador;
 @SuppressWarnings({ "serial", "deprecation" })
 @ManagedBean
 @ViewScoped
-public class AdministradorBean implements Serializable{
+public class AdministradorBean implements Serializable {
 
 	private Administrador administrador;
 	private List<Administrador> administradores;
-	
+
 	public Administrador getAdministrador() {
 		return administrador;
 	}
-	
+
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
 	}
-	
+
 	public List<Administrador> getAdministradores() {
 		return administradores;
 	}
-	
+
 	public void setAdministradores(List<Administrador> administradores) {
 		this.administradores = administradores;
 	}
-	
+
 	@PostConstruct
 	public void listar() {
 		try {
 			AdministradorDAO administradorDAO = new AdministradorDAO();
 			administradores = administradorDAO.listar();
-		}
-		catch(RuntimeException erro) {
+		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro na listagem");
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void novo() {
 		administrador = new Administrador();
 	}
-	
+
 	public void salvar() {
 		try {
 			PessoaDAO pessoaDAO = new PessoaDAO();
@@ -61,13 +60,12 @@ public class AdministradorBean implements Serializable{
 			novo();
 			listar();
 			Messages.addGlobalInfo("Administrador foi salvo corretamente");
-		}
-		catch(RuntimeException erro) {
+		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Erro: Administrador não foi salva");
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void excluir(ActionEvent evento) {
 		try {
 			administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
@@ -75,14 +73,20 @@ public class AdministradorBean implements Serializable{
 			administradorDAO.excluir(administrador);
 			Messages.addGlobalInfo("O objeto foi removido");
 			listar();
-		}
-		catch (RuntimeException erro) {
+		} catch (RuntimeException erro) {
 			Messages.addFlashGlobalError("Ocorreu um erro na remoção");
 			erro.printStackTrace();
 		}
 	}
-	
+
 	public void editar(ActionEvent evento) {
-		administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
+		try {
+			administrador = (Administrador) evento.getComponent().getAttributes().get("escolhido");
+		}
+		catch(RuntimeException erro)
+		{
+			Messages.addFlashGlobalError("Ocorreu um erro na edição");
+			erro.printStackTrace();
+		}
 	}
 }

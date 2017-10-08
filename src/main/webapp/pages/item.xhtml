@@ -11,7 +11,7 @@
 <h:body>
 	<p:growl id="mensagem"/>
 
-	<h:form id="formListagem">
+	<h:form id="formListagem" enctype="multipart/form-data">
 		<p:panel header="Item - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
 				paginator="true" value="#{itemBean.itens}" var="item" rows="10">
@@ -87,6 +87,7 @@
 					<f:selectItem itemLabel="Selecione uma Categoria" noSelectionOption="true"/>
 					<f:selectItems value="#{itemBean.categorias}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}"/>
 				</p:selectOneMenu>
+				
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" actionListener="#{itemBean.salvar()}" 

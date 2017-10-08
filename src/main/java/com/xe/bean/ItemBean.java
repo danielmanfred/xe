@@ -94,8 +94,8 @@ public class ItemBean implements Serializable {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			servidores = usuarioDAO.listar();
-			categorias = categoriaDAO.listar();
+			servidores = usuarioDAO.listar("nome");
+			categorias = categoriaDAO.listar("nome");
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro na listagem de servidores ou categorias");
@@ -151,4 +151,5 @@ public class ItemBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
+	
 }
