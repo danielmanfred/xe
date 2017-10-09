@@ -15,5 +15,5 @@ Desenvolvido na linguagem Java
 
 Tecnologias utilizadas:
 
-Os vídeos da apresentação da 2ª Sprint do projeto encontra-se no Youtube.
-Segue o link do vídeo: https://www.youtube.com/watch?v=SIdSlu9F-ys
+Os vídeos da apresentação da 3ª Sprint do projeto encontra-se no Youtube.
+Segue o link do vídeo: https://www.youtube.com/watch?v=oupXzkAkC_g&feature=youtu.be
