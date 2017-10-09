@@ -1,6 +1,9 @@
 package com.xe.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -84,6 +87,7 @@ public class NegocioBean implements Serializable {
 		try {
 			NegocioDAO dao = new NegocioDAO();
 			negocios = dao.listar();
+			//negocios = new ArrayList<>();
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro na listagem");
@@ -105,6 +109,21 @@ public class NegocioBean implements Serializable {
 		}
 	}
 	
+	private void novoCliente() {
+		negocio = new Negocio();
+		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			ItemDAO itemDAO = new ItemDAO();
+			cliente = usuarioDAO.buscar(3L);
+			clientes = usuarioDAO.listar("nome");
+			itens = itemDAO.listar("nome");
+		}
+		catch(RuntimeException erro) {
+			Messages.addGlobalError("Erro na listagem de clientes ou itens");
+			erro.printStackTrace();
+		}
+	}
+	
 	public void salvar() {
 		try {
 			NegocioDAO negocioDAO = new NegocioDAO();
@@ -116,12 +135,12 @@ public class NegocioBean implements Serializable {
 			itens = itemDAO.listar(); 
 			
 			negocios = negocioDAO.listar();
-			Messages.addGlobalInfo("Negocio foi salvo corretamente");
+			Messages.addGlobalInfo("Negocio foi realizada corretamente");
 		}
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro: Negocio não foi salvo");
 			erro.printStackTrace();
-		}
+		}   
 	}
 	
 	public void excluir(ActionEvent evento) {
@@ -149,6 +168,64 @@ public class NegocioBean implements Serializable {
 		catch(RuntimeException erro) {
 			Messages.addGlobalError("Erro na listagem de clientes ou itens");
 			erro.printStackTrace();
+		}
+	}
+	
+	public void editarAcordo(ActionEvent evento) {
+		
+		negocio = (Negocio) evento.getComponent().getAttributes().get("escolhido");
+		
+		alterarAcordo();
+		
+		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			ItemDAO itemDAO = new ItemDAO();
+			clientes = usuarioDAO.listar();
+			itens = itemDAO.listar();
+		}
+		catch(RuntimeException erro) {
+			Messages.addGlobalError("Erro na listagem de clientes ou itens");
+			erro.printStackTrace();
+		}
+	}
+	
+	public void selecionarItem(ActionEvent evento) throws ParseException {
+		item = (Item) evento.getComponent().getAttributes().get("escolhido");
+		
+		boolean flag = true;
+		
+		for (int p = 0; p < negocios.size(); p++) {
+			if (negocios.get(p).getItem().equals(item)) {
+				flag = false;
+			}
+		}
+		
+		if (flag) {
+			novoCliente();		
+			
+			negocio.setCliente(cliente);
+			negocio.setItem(item);
+			negocio.setData(new SimpleDateFormat("dd/MM/yyyy").parse("08/10/2017"));
+			negocio.setValor(new BigDecimal("23.22"));
+			negocio.setAcordo(false);
+			negocio.setTipo('U');
+
+			salvar();
+		}
+		else {
+			Messages.addGlobalError("O objeto já foi inserido antes");
+		}
+	}
+	
+	public void alterarAcordo() {
+		
+		if (negocio.getAcordo()) {
+			negocio.setAcordo(false);
+			Messages.addGlobalInfo("Negociação foi desativada");
+		}
+		else {
+			negocio.setAcordo(true);
+			Messages.addGlobalInfo("Negociação foi ativada");
 		}
 	}
 }

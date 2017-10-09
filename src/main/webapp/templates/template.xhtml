@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Xé - Economia Compartilhada</title>
+</h:head>
+<h:body>
+		<p:growl id="mensagem"/>
+	
+		<div id="header">
+			<h:form id="menu">
+			<p:menubar>
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Administrador" url="/pages/administrador.xhtml"/>
+					<p:menuitem value="Categoria" url="/pages/categoria.xhtml"/>
+					<p:menuitem value="Material" url="/pages/item.xhtml"/>
+					<p:menuitem value="Negócio" url="/pages/negocio.xhtml"/>
+					<p:menuitem value="Estudante" url="/pages/usuario.xhtml"/>
+				</p:submenu>
+				
+				<p:submenu label="Compartilhamento">
+					<p:menuitem value="Tela do estudante" url="/pages/compartilhamento.xhtml"/>
+				</p:submenu>
+				
+				<p:submenu label="Categorias">
+					<p:menuitem value="Sessão de categorias" url="/pages/categoria.xhtml"/>
+				</p:submenu>
+			</p:menubar>
+			</h:form>
+		</div>
+		
+		<div id="conteudo">
+			<ui:insert name="conteudo"/>
+		</div>
+	
+</h:body>
+</html>

@@ -28,6 +28,7 @@ public class ItemBean implements Serializable {
 	private List<Usuario> servidores;
 	private List<Categoria> categorias;
 	private List<Item> itens;
+	private List<Item> itensServidor;
 	
 	public Usuario getServidor() {
 		return servidor;
@@ -53,6 +54,14 @@ public class ItemBean implements Serializable {
 		this.item = item;
 	}
 	
+	public List<Item> getItensServidor() {
+		return itensServidor;
+	}
+	
+	public void setItensServidor(List<Item> itensServidor) {
+		this.itensServidor = itensServidor;
+	}
+	
 	public List<Usuario> getServidores() {
 		return servidores;
 	}
@@ -75,6 +84,10 @@ public class ItemBean implements Serializable {
 	
 	public void setItens(List<Item> itens) {
 		this.itens = itens;
+	}
+	
+	public ItemBean() {
+		
 	}
 	
 	@PostConstruct
@@ -103,14 +116,31 @@ public class ItemBean implements Serializable {
 		}
 	}
 	
+	public void novoItem() {
+		
+		try {
+			item = new Item();
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			servidor = usuarioDAO.buscar(3L);
+			item.setServidor(servidor);
+			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			categorias = categoriaDAO.listar("nome");
+		}
+		catch(RuntimeException erro) {
+			Messages.addGlobalError("Erro na listagem de servidores ou categorias");
+			erro.printStackTrace();
+		}
+	}
+	
 	public void salvar() {
 		try {
-			ItemDAO itemDAO = new ItemDAO();
+			ItemDAO itemDAO = new ItemDAO();			
 			itemDAO.merge(item);
 			
 			item = new Item();
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			
 			servidores = usuarioDAO.listar();
 			categorias = categoriaDAO.listar();
 			
@@ -151,5 +181,5 @@ public class ItemBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
+
 }

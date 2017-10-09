@@ -1,17 +1,13 @@
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Item</title>
-</h:head>
-<h:body>
-	<p:growl id="mensagem"/>
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template.xhtml">
 
-	<h:form id="formListagem" enctype="multipart/form-data">
+	<ui:define name="conteudo">
+	<h:form id="formListagem">
 		<p:panel header="Item - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
 				paginator="true" value="#{itemBean.itens}" var="item" rows="10">
@@ -96,5 +92,6 @@
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>
-</h:body>
-</html>
+	</ui:define>
+
+</ui:composition>

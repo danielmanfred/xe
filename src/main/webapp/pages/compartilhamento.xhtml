@@ -1,32 +1,25 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Compartilhamento</title>
-</h:head>
-<h:body>
-	<p:growl id="mensagem" />
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/template.xhtml">
 
-	<h:form>
-		<p:panel header="Produtos">
-			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabela"
+	<ui:define name="conteudo">
+
+	<h:form id="formListagem">
+		<p:panel header="Lista de Material Universitário">
+			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabelaMaterial"
 				paginator="true" value="#{itemBean.itens}" var="item" rows="10">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();"
-						actionListener="#{itemBean.novo()}"
+					<p:commandButton value="Adicionar Material" oncomplete="PF('dialogo').show();" actionListener="#{itemBean.novoItem}" 
 						update=":mensagem :cadastro:painel">
-						<f:actionListener
-							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />		
 					</p:commandButton>
 				</f:facet>
 				
-				<p:column headerText="Nome" sortBy="#{item.nome}"
-					filterBy="#{item.nome}">
+				<p:column headerText="Nome" sortBy="#{item.nome}" filterBy="#{item.nome}">
 					<h:outputText value="#{item.nome}" />
 				</p:column>
 				<p:column headerText="Servidor" sortBy="#{item.servidor}">
@@ -38,16 +31,86 @@
 				<p:column headerText="Categoria" sortBy="#{item.categoria}">
 					<h:outputText value="#{item.categoria.nome}" />
 				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-plus" actionListener="#{negocioBean.selecionarItem}" 
+						update=":mensagem :formListagem:tabelaNegociacao">
+						<f:attribute name="escolhido" value="#{item}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</p:column>
 			</p:dataTable>
 		</p:panel>
-
-		<p:panel header="Área de compartilhamento">
-
-		</p:panel>
-
-		<p:panel header="Área de compartilhamento">
-
+		
+		<p:panel header="Lista de Negociações">
+			<p:dataTable emptyMessage="Nenhum registro encontrado." id="tabelaNegociacao"
+				paginator="true" value="#{negocioBean.negocios}" var="negocio" rows="5">
+	
+				<p:column headerText="Item">
+					<h:outputText value="#{negocio.item.nome}" />
+				</p:column>
+				<p:column headerText="Cliente">
+					<h:outputText value="#{negocio.cliente.nome}" />
+				</p:column>
+				<p:column headerText="Data">
+					<h:outputText value="#{negocio.data}">
+						<f:convertDateTime locale="pt_BR"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Valor">
+					<h:outputText value="#{negocio.valor}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Acordo">
+					<h:outputText value="#{negocio.formatAcordo}" />
+				</p:column>
+				<p:column headerText="Tipo">
+					<h:outputText value="#{negocio.formatTipo}" />
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-minus" actionListener="#{negocioBean.editarAcordo}" 
+						update=":mensagem :formListagem:tabelaNegociacao">
+						<f:attribute name="escolhido" value="#{negocio}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
 		</p:panel>
 	</h:form>
-</h:body>
-</html>
+
+	<p:dialog header="Item - Cadastro" widgetVar="dialogo"
+		draggable="false" resizable="false" modal="true" closable="false">
+		<h:form id="cadastro">
+			<h:panelGrid id="painel" columns="2">
+				
+				<p:outputLabel value="Nome:" for="nome"/>
+				<p:inputText id="nome" size="30" maxlength="50" value="#{itemBean.item.nome}" required="true" 
+					requiredMessage="O campo 'nome' não pode estar vazio"/>
+				
+				<p:outputLabel value="Quantidade:" for="quantidade"/>
+				<p:inputText id="quantidade" size="10" maxlength="4" value="#{itemBean.item.quantidade}" required="true"
+					requiredMessage="É necessário preencher o campo quantidade"
+					converterMessage="Quantidade inválida"
+					validatorMessage="A quantidade deve estar entre os valores 1 e 50">
+					<f:validateLongRange minimum="1" maximum="50"/>	
+				</p:inputText>
+				
+				
+				<p:outputLabel value="Categoria:" for="categoria"/>
+				<p:selectOneMenu id="categoria" filter="true" value="#{itemBean.item.categoria}" converter="omnifaces.SelectItemsConverter"
+					required="true" requiredMessage="É necessário selecionar uma categoria">
+					<f:selectItem itemLabel="Selecione uma Categoria" noSelectionOption="true"/>
+					<f:selectItems value="#{itemBean.categorias}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}"/>
+				</p:selectOneMenu>
+				
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Salvar" actionListener="#{itemBean.salvar()}" 
+					update=":mensagem :cadastro:painel :formListagem:tabelaMaterial"/>
+				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
+	</ui:define>
+
+</ui:composition>
