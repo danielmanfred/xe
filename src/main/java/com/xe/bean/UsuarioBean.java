@@ -85,4 +85,14 @@ public class UsuarioBean implements Serializable {
 	public void editar(ActionEvent evento) {
 		usuario = (Usuario) evento.getComponent().getAttributes().get("escolhido");
 	}
+	
+	public void criarConta(String nome, String matricula, String senha) {		
+		usuario = new Usuario();
+		
+		usuario.setNome(nome);
+		usuario.setMatricula(matricula);
+		usuario.setSenha(senha);
+		salvar();
+	}
+	
 }
